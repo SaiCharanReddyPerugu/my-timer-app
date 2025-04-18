@@ -1,11 +1,17 @@
+@font-face {
+  font-family: 'Rubik';
+  src: url('/Assets/Fonts/Rubik-Black.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  font-family: 'Rubik', sans-serif;
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: #BABABA;
+  background-color: #191919;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -13,56 +19,170 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
+/* src/styles.css or index.css */
+
+.zt-main-container {
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.zt-main-holder {
+  height: auto;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+.zt-mb {
+  margin-bottom: 48px;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.zt-mb-24 {
+  margin-bottom: 24px;
+}
+
+.zt-bg {
+  background-image: url(Assets/Images/Background_Image.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.zt-no-bg {
+  background: none;
+}
+
+.zt-sc-holder {
+  height: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 96px;
+  gap: 24px;
+}
+
+.zt-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.zt-items-spread {
+  width: fit-content;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+
+.zt-item-grid {
+  height: auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 16px;
+}
+
+
+.zt-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 80px;
+  margin-bottom: 64px;
+}
+
+.zt-main-tile-1 {
+  background-color: #212121;
+  border: 1px solid #BABABA;
+  border-radius: 10px;
+  padding: 24px;
+  color: #BABABA;
+  display: flex;
+  flex-direction: column;
+  width: 406px;
+  height: 502px;
+  max-width: 500px;
+}
+
+.zt-main-tile-2 {
+  background-color: #212121;
+  border: 1px solid #BABABA;
+  border-radius: 10px;
+  padding: 24px;
+  color: #BABABA;
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+  height: 502px;
+}
+
+.zt-main-tile-3 {
+  background-color: #212121;
+  border: 1px solid #BABABA;
+  box-sizing: border-box;
+  border-radius: 10px;
+  padding: 24px;
+  color: #BABABA;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+}
+
+.zt-tile-container {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+}
+
+.zt-tile-sec-1 {
+  height: 122px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.zt-tile-sec-2 {
+  border-top: .5px solid #BABABA;
+  width: 100%;
+  height: 100%;
+  padding-top: 24px;
+}
+
+.zt-item-wrapper {
+  display: flex;
+  width: 100%;
+  height: 32px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.zt-item-aligner-right {
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 24px;
+}
+
+.zt-item-aligner-left {
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 24px;
 }

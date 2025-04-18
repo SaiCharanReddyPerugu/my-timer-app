@@ -1,6 +1,33 @@
-const { contextBridge, ipcRenderer } = require('electron');
+const { contextBridge, ipcRenderer } = require("electron");
 
-contextBridge.exposeInMainWorld('electronAPI', {
-  toggleFullscreen: () => ipcRenderer.send('toggle-fullscreen'),
-  toggleAlwaysOnTop: () => ipcRenderer.send('toggle-always-on-top'),
+contextBridge.exposeInMainWorld("electronAPI", {
+  // Session storage
+  saveSession: (data) => ipcRenderer.invoke("save-session", data),
+  getSessions: () => ipcRenderer.invoke("get-sessions"),
+  deleteSession: (timestamp) => ipcRenderer.invoke("delete-session", timestamp),
+
+  // Timer state storage
+  saveTimerState: (state) => ipcRenderer.invoke("save-timer-state", state),
+  loadTimerState: () => ipcRenderer.invoke("load-timer-state"),
+
+  // UI interactions
+  toggleFullscreen: () => ipcRenderer.send("toggle-fullscreen"),
+  toggleAlwaysOnTop: () => ipcRenderer.send("toggle-always-on-top"),
+  maximizeWindow: () => ipcRenderer.send("maximize-window"),
+
+  // Event listeners from main process
+  onFloatingModeChanged: (callback) =>
+    ipcRenderer.on("floating-mode-changed", (_event, state) => callback(state)),
+
+  onSaveBeforeQuit: (callback) => {
+    ipcRenderer.on('save-timer-before-quit', callback);
+  },
+
+  // Remove the event listener
+  removeSaveBeforeQuit: (callback) => {
+    ipcRenderer.removeListener('save-timer-before-quit', callback);
+  },
+
+  
+  sendSessionSaved: () => ipcRenderer.send("session-saved"),
 });
