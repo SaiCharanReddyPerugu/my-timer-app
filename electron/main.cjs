@@ -9,6 +9,8 @@ let previousBounds = null;
 const userDataPath = app.getPath("userData");
 const stateFile = path.join(userDataPath, "timerState.json");
 const sessionsFile = path.join(userDataPath, "sessions.json");
+const reasonsFile = path.join(userDataPath, "reasons.json");
+
 
 const createWindow = () => {
   mainWindow = new BrowserWindow({
@@ -63,24 +65,6 @@ ipcMain.handle("save-session", async (event, sessionData) => {
   fs.writeFileSync(sessionsFile, JSON.stringify(data, null, 2));
 });
 
-// ipcMain.handle("save-session", async (event, sessionData) => {
-//   try {
-//     if (sessionData.startTime === lastSessionTime) return;
-//     lastSessionTime = sessionData.startTime;
-
-//     let data = [];
-//     if (await fs.access(sessionsFile).then(() => true).catch(() => false)) {
-//       const raw = await fs.readFile(sessionsFile, "utf-8");
-//       data = JSON.parse(raw);
-//     }
-
-//     data.push(sessionData);
-//     await fs.writeFile(sessionsFile, JSON.stringify(data, null, 2));
-//   } catch (err) {
-//     console.error("Failed to save session:", err);
-//   }
-// });
-
 ipcMain.handle("get-sessions", async () => {
   if (fs.existsSync(sessionsFile)) {
     return JSON.parse(fs.readFileSync(sessionsFile));
@@ -109,6 +93,31 @@ ipcMain.handle("delete-session", async (event, timestamp) => {
   return false;
 });
 
+ipcMain.handle("get-reasons", () => {
+  if (fs.existsSync(reasonsFile)) {
+    return JSON.parse(fs.readFileSync(reasonsFile));
+  }
+  return { focus: [], break: [] };
+});
+
+ipcMain.handle("save-reasons", (event, reasons) => {
+  fs.writeFileSync(reasonsFile, JSON.stringify(reasons, null, 2));
+});
+
+ipcMain.handle("delete-reason", (event, { type, reason }) => {
+  if (!fs.existsSync(reasonsFile)) return;
+
+  const reasons = JSON.parse(fs.readFileSync(reasonsFile));
+
+  if (!reasons[type]) return;
+
+  reasons[type] = reasons[type].filter((r) => r !== reason);
+
+  fs.writeFileSync(reasonsFile, JSON.stringify(reasons, null, 2));
+});
+
+
+
 ipcMain.on("toggle-fullscreen", () => {
   if (mainWindow) {
     mainWindow.setFullScreen(!mainWindow.isFullScreen());
@@ -131,24 +140,26 @@ ipcMain.on("toggle-always-on-top", () => {
 
     if (isFloating) {
       const { width } = screen.getPrimaryDisplay().workAreaSize;
-      const floatSize = 300;
+      const floatWidth = 400;
+      const floatHeight = 300;
       const margin = 20;
-
+    
       // Resize and move to top-right
-      mainWindow.setSize(floatSize, floatSize);
+      mainWindow.setSize(floatWidth, floatHeight);
       mainWindow.setBounds({
-        x: width - floatSize - margin,
+        x: width - floatWidth - margin,
         y: margin,
-        width: floatSize,
-        height: floatSize,
+        width: floatWidth,
+        height: floatHeight,
       });
     } else {
       // Restore to original size and center it
       mainWindow.maximize();
     }
-
+    
     // Notify renderer
     mainWindow.webContents.send("floating-mode-changed", isFloating);
+    
   }
 });
 
@@ -157,13 +168,3 @@ ipcMain.on("maximize-window", () => {
     mainWindow.maximize();
   }
 });
-
-// ipcMain.once("session-saved", () => {
-//   console.log("✅ Renderer confirmed session saved.");
-//   mainWindow.forceClose = true;
-//   mainWindow.close();
-// });
-
-
-const count = ipcMain.listenerCount("save-timer-before-quit");
-console.log("Main listener count for save-timer-before-quit:", count);

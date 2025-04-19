@@ -70,19 +70,11 @@ const App = () => {
         )}
 
         <div style={{ display: analyticsMode ? "none" : "block" }}>
-          {/* <Timer
-            key={resetKey}
-            onEndSession={() => setShowModal(true)}
-            onSessionComplete={setSessionData}
-            onModeChange={setCurrentMode}
-          /> */}
-
           <Timer
             key={resetKey}
-            // onEndSession={() => setShowModal(true)} // ❌ REMOVE this
             onSessionComplete={(data) => {
               setSessionData(data);
-              setResetKey((prev) => prev + 1); // ✅ Triggers Timer reset
+              setResetKey((prev) => prev + 1);
             }}
             onModeChange={setCurrentMode}
           />

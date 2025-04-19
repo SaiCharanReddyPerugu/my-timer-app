@@ -87,13 +87,25 @@
 }
 
 .zt-item-grid {
-  height: auto;
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 16px;
+  width: 100%;
 }
 
+.zt-reason-wrapper {
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  gap: 8px;
+}
+
+.zt-add-reason-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: nowrap;
+}
 
 .zt-wrapper {
   display: flex;
