@@ -20,6 +20,7 @@ contextBridge.exposeInMainWorld("electronAPI", {
   toggleFullscreen: () => ipcRenderer.send("toggle-fullscreen"),
   toggleAlwaysOnTop: () => ipcRenderer.send("toggle-always-on-top"),
   maximizeWindow: () => ipcRenderer.send("maximize-window"),
+  windowAction: (action) => ipcRenderer.send("window-action", action),
 
   // Event listeners from main process
   onFloatingModeChanged: (callback) =>

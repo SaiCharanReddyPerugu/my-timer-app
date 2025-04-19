@@ -198,3 +198,11 @@
   align-items: center;
   gap: 24px;
 }
+
+.window-controls {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  gap: 8px;
+}

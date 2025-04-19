@@ -29,7 +29,7 @@ const ReasonModal = ({
   return (
     <div className="zt-modal-overlay">
       <div className="zt-modal-content">
-        <h3 className="zt-title-m">{title}</h3>
+        <h3 className="zt-modal-title">{title}</h3>
 
         {/* Reason input */}
         <input
@@ -94,7 +94,7 @@ const ReasonModal = ({
         </div>
 
         {/* Confirm / Cancel */}
-        <div className="zt-items-spread">
+        <div className="zt-items-spread zt-modal-ctrl">
           <button className="zt-bt-sc-l" onClick={() => onConfirm()}>
             Confirm
           </button>

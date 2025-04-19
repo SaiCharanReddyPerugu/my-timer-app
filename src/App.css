@@ -2,6 +2,11 @@
     margin: 0px;
 }
 
+button:focus {
+    outline: none;
+    box-shadow: none;
+}
+
 .zt-dd-pr-s {
     font-family: "Rubik";
     color: #bababa;
@@ -13,6 +18,11 @@
     font-size: 12px;
     border: 1px solid #BABABA;
     cursor: pointer;
+}
+
+.zt-dd-pr-s:focus {
+    outline: none;
+    box-shadow: none;
 }
 
 .zt-dd-pr-s option {
@@ -37,6 +47,13 @@
 .zt-title-m {
     font-size: 48px;
     font-family: "Rubik";
+    text-transform: uppercase;
+    line-height: 0.8;
+}
+
+.zt-title-s {
+    font-size: 24px;
+    font-family: "Rubik";
     text-align: center;
     text-transform: uppercase;
     line-height: 0.8;
@@ -52,28 +69,20 @@
     color: #212121;
 }
 
-.zt-bt-sc-s {
-    height: 32px;
-    width: auto;
+.zt-modal-title {
+    font-size: 48px;
     font-family: "Rubik";
-    color: #bababa;
-    background-color: transparent;
-    border-radius: 8px;
-    font-size: 12px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 16px;
-    border: 1px solid #BABABA;
-    cursor: pointer;
-    transition: all 0.3 ease;
-    gap: 16px;
-    white-space: nowrap;
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 0.8;
 }
 
-.zt-bt-sc-s:hover {
-    color: #191919;
-    background-color: #BABABA;
+.zt-modal-title-l {
+    font-size: 48px;
+    font-family: "Rubik";
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 0.8;
 }
 
 .zt-tag {
@@ -138,12 +147,6 @@
     border: none;
     font-size: 20px;
     cursor: pointer;
-}
-
-.zt-modal-title {
-    margin-bottom: 16px;
-    font-size: 18px;
-    font-weight: bold;
 }
 
 .zt-modal-history {
@@ -215,6 +218,7 @@
     border-radius: 8px;
     width: 237px;
     height: 48px;
+    padding: 0 16px;
     border: none;
     transition: background-color 0.3s ease-in-out, border 0.3s ease-in-out, color 0.3s ease-in-out;
     cursor: pointer;
@@ -223,7 +227,62 @@
 .zt-bt-pr-l:hover {
     background-color: #BABABA;
     color: #191919;
-    /* border: 3px solid #191919; */
+}
+
+.zt-bt-ctrl {
+    height: 32px;
+    width: 32px;
+    font-family: "Rubik";
+    color: #191919;
+    background-color: transparent;
+    border-radius: 8px;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #191919;
+    cursor: pointer;
+    transition: all 0.3 ease;
+    white-space: nowrap;
+}
+
+.zt-bt-ctrl:hover {
+    background-color: #191919;
+    color: #BABABA;
+}
+
+.zt-bt-ctrl.analytics {
+    border-color: #BABABA;
+    color: #BABABA;
+}
+
+.zt-bt-ctrl.analytics:hover {
+    background-color: #BABABA;
+    color: #191919;
+}
+
+.zt-bt-sc-s {
+    height: 32px;
+    width: auto;
+    font-family: "Rubik";
+    color: #bababa;
+    background-color: transparent;
+    border-radius: 8px;
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+    border: 1px solid #BABABA;
+    cursor: pointer;
+    transition: all 0.3 ease;
+    gap: 16px;
+    white-space: nowrap;
+}
+
+.zt-bt-sc-s:hover {
+    color: #191919;
+    background-color: #BABABA;
 }
 
 .zt-bt-sc-l {
@@ -253,4 +312,76 @@
     background-color: #BABABA;
     color: #191919;
     border: 3px solid transparent;
+}
+
+@media (max-width: 500px) {
+    #main-page-logo {
+        display: none;
+    }
+
+    #zt-main-title-l {
+        font-size: 24px;
+        margin-top: 4px;
+    }
+
+    #zt-timer {
+        font-size: 48px;
+    }
+
+    #zt-bg-float {
+        background: linear-gradient(345deg, #191919, #BABABA);
+    }
+
+    .zt-main-container {
+        -webkit-app-region: drag;
+    }
+
+    .zt-main-holder {
+        gap: 12px;
+        margin-bottom: 0px;
+    }
+
+    .zt-items-spread {
+        gap: 16px;
+        margin-bottom: 6px;
+    }
+
+    .zt-center {
+        gap: 0px;
+    }
+
+    .zt-mb {
+        margin-bottom: 0px;
+    }
+
+    .zt-bt-pr-l {
+        width: 120px;
+        height: 38px;
+        font-size: 12px;
+        -webkit-app-region: no-drag;
+    }
+
+    .zt-bt-sc-l {
+        -webkit-app-region: no-drag;
+    }
+
+    .zt-bt-ctrl {
+        -webkit-app-region: no-drag;
+    }
+
+    .zt-modal-title {
+        font-size: 24px;
+    }
+
+    .zt-dd-pr-s {
+        display: none;
+    }
+
+    .zt-add-reason-row {
+        display: none;
+    }
+
+    /* .zt-modal-ctrl {
+        display: none;
+    } */
 }

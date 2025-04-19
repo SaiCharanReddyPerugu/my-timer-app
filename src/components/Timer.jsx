@@ -230,12 +230,18 @@ const Timer = ({ onSessionComplete, onEndSession, onModeChange }) => {
   return (
     <div className="zt-center">
       <div className="zt-center zt-mb">
-        <p className={mode === "break" ? "zt-timer-small" : "zt-timer-large"}>
+        <p
+          id="zt-timer"
+          className={mode === "break" ? "zt-timer-small" : "zt-timer-large"}
+        >
           {formatTime(focusTime)}
         </p>
 
         {breakTime > 0 && (
-          <p className={mode === "break" ? "zt-timer-large" : "zt-timer-small"}>
+          <p
+            id="zt-timer"
+            className={mode === "break" ? "zt-timer-large" : "zt-timer-small"}
+          >
             {formatTime(breakTime)}
           </p>
         )}

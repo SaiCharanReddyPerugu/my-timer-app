@@ -138,11 +138,13 @@ const Analytics = ({ onBack }) => {
       </div>
 
       <div>
-        <div className="zt-item-aligner-right zt-mb" >
-        <h2 className="zt-title-m">SESSION REPORT</h2>
-        <button className="zt-bt-sc-s" onClick={() => setMinFocusTime(0)}>Reset</button>
+        <div className="zt-item-aligner-right zt-mb">
+          <h2 className="zt-title-m">SESSION REPORT</h2>
+          <button className="zt-bt-sc-s" onClick={() => setMinFocusTime(0)}>
+            Reset
+          </button>
         </div>
-        
+
         <div className="zt-sc-holder">
           <div className="zt-tile-container">
             <FocusBreakPieChart
@@ -205,7 +207,9 @@ const Analytics = ({ onBack }) => {
             onChange={(e) => setMinFocusTime(Number(e.target.value))}
             className="zt-dd-pr-s"
           />
-          <button className="zt-bt-sc-s" onClick={() => setMinFocusTime(0)}>Reset</button>
+          <button className="zt-bt-sc-s" onClick={() => setMinFocusTime(0)}>
+            Reset
+          </button>
         </div>
 
         <div className="zt-table-container">

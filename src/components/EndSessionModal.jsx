@@ -10,21 +10,13 @@ const EndSessionModal = ({ sessionData, onConfirm, onClose }) => {
   return (
     <div className="zt-modal-overlay">
       <div className="zt-modal-content">
-        <h2 className="zt-modal-title">End Current Session?</h2>
-        <p className="">
-          Are you sure you want to end this session?
-        </p>
+        <h2 className="zt-modal-title-l">End Current Session?</h2>
+        <p className="zt-title-s">Think Before ending the session.</p>
         <div className="zt-items-spread">
-          <button
-            onClick={handleConfirm}
-            className="zt-bt-sc-s"
-          >
+          <button onClick={handleConfirm} className="zt-bt-sc-l">
             End Session
           </button>
-          <button
-            onClick={onClose}
-            className="zt-bt-sc-s"
-          >
+          <button onClick={onClose} className="zt-bt-sc-l">
             Cancel
           </button>
         </div>

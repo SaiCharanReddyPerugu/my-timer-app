@@ -4,12 +4,14 @@ const isDev = !app.isPackaged;
 const fs = require("fs");
 
 let mainWindow;
+let isFloating = false;
 let lastSessionTime = null;
 let previousBounds = null;
 const userDataPath = app.getPath("userData");
 const stateFile = path.join(userDataPath, "timerState.json");
 const sessionsFile = path.join(userDataPath, "sessions.json");
 const reasonsFile = path.join(userDataPath, "reasons.json");
+
 
 
 const createWindow = () => {
@@ -19,7 +21,8 @@ const createWindow = () => {
     icon: path.join(__dirname, '../public/Zentym_Icon_Grey.ico'),
     alwaysOnTop: false,
     autoHideMenuBar: true,
-    frame: true,
+    frame: false,
+    resizable: !isFloating,
     webPreferences: {
       preload: path.join(__dirname, "preload.cjs"),
       contextIsolation: true,
@@ -125,41 +128,58 @@ ipcMain.on("toggle-fullscreen", () => {
 });
 
 ipcMain.on("toggle-always-on-top", () => {
-  if (mainWindow) {
-    const isFloating = !mainWindow.isAlwaysOnTop();
+  if (!mainWindow) return;
 
-    // Exit fullscreen or maximized mode before floating
-    if (mainWindow.isFullScreen()) {
-      mainWindow.setFullScreen(false);
-    }
-    if (mainWindow.isMaximized()) {
-      mainWindow.unmaximize();
-    }
+  isFloating = !isFloating;
 
-    mainWindow.setAlwaysOnTop(isFloating);
+  mainWindow.focus();
 
-    if (isFloating) {
-      const { width } = screen.getPrimaryDisplay().workAreaSize;
-      const floatWidth = 400;
-      const floatHeight = 300;
-      const margin = 20;
-    
-      // Resize and move to top-right
-      mainWindow.setSize(floatWidth, floatHeight);
-      mainWindow.setBounds({
-        x: width - floatWidth - margin,
-        y: margin,
-        width: floatWidth,
-        height: floatHeight,
-      });
-    } else {
-      // Restore to original size and center it
-      mainWindow.maximize();
-    }
-    
-    // Notify renderer
-    mainWindow.webContents.send("floating-mode-changed", isFloating);
-    
+  if (mainWindow.isFullScreen()) {
+    mainWindow.setFullScreen(false);
+  }
+  if (mainWindow.isMaximized()) {
+    mainWindow.unmaximize();
+  }
+
+  mainWindow.setAlwaysOnTop(isFloating);
+  mainWindow.setResizable(!isFloating);
+
+  if (isFloating) {
+    const { width } = screen.getPrimaryDisplay().workAreaSize;
+    const floatWidth = 350;
+    const floatHeight = 300;
+    const margin = 20;
+
+    mainWindow.setSize(floatWidth, floatHeight);
+    mainWindow.setBounds({
+      x: width - floatWidth - margin,
+      y: margin,
+      width: floatWidth,
+      height: floatHeight,
+    });
+  } else {
+    mainWindow.maximize();
+  }
+
+  mainWindow.webContents.send("floating-mode-changed", isFloating);
+});
+
+ipcMain.on("window-action", (event, action) => {
+  if (!mainWindow) return;
+  switch (action) {
+    case "minimize":
+      mainWindow.minimize();
+      break;
+    case "maximize":
+      if (mainWindow.isMaximized()) {
+        mainWindow.unmaximize();
+      } else {
+        mainWindow.maximize();
+      }
+      break;
+    case "close":
+      mainWindow.close();
+      break;
   }
 });
 
